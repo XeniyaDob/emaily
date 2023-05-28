@@ -8,8 +8,13 @@ module.exports = app => {
     })
   )
 
-  app.get("/auth/google/callback",
-    passport.authenticate("google"))
+  app.get(
+    "/auth/google/callback",
+    passport.authenticate("google"),
+    (req, res) => {
+      res.redirect("/surveys");
+    }
+  )
 //kill cookies
   app.get("/api/logout", (req, res) => {
     req.logout()
@@ -20,7 +25,3 @@ module.exports = app => {
     res.send(req.user)
   })
 }
-//Test steps:
-//1 go to - http://localhost:5000/auth/google - you should see "Cannot GET /auth/google/callback", fix it later
-//2 see user ID - http://localhost:5000/api/current_user
-//3 logout - http://localhost:5000/api/logout - clean window
