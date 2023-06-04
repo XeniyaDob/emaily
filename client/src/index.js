@@ -2,6 +2,8 @@ import "materialize-css/dist/css/materialize.min.css";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
+import reduxThunk from "redux-thunk";
+
 import App from "./components/App";
 import reducers from "./reducers";
 
@@ -9,7 +11,7 @@ import reducers from "./reducers";
 //to encourage the use of Redux Toolkit (which introduces configureStore)
 //instead of using createStore directly. This is purposeful decision to use
 // plain React Redux without any abstractions like Redux Toolkit.
-const store = createStore(reducers, {}, applyMiddleware());
+const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 const el = document.getElementById("root");
 
