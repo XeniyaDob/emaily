@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import StripeCheckout from "react-stripe-checkout";
+import { connect } from "react-redux";
+import * as action from "../actions";
 
 class Payments extends Component {
   render() {
@@ -8,11 +10,11 @@ class Payments extends Component {
         name="Emaily" // the pop-in header title
         description="$5 for 5 email credits" // the pop-in header subtitle
         amount={500} //default dollars, 500 cents
-        token={(token) => console.log("Stripe Token", token)} //expecting to received callback func, token from stripe
+        token={(token) => this.props.handleToken(token)} //expecting to received callback func, token from stripe
         stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}>
         <button className="btn">Add Credits</button>
       </StripeCheckout>
     );
   }
 }
-export default Payments;
+export default connect(null, action)(Payments);
