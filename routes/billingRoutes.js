@@ -13,6 +13,9 @@ module.exports = (app) => {
       description:
         "$5 for 5 credits. My First Test Charge (created for API docs at https://www.stripe.com/docs/api)",
     });
-    console.log("Charge", charge);
+    req.user.credits += 5;
+    const user = await req.user.save();
+
+    res.send(user);
   });
 };
