@@ -17,8 +17,10 @@ class Header extends Component {
       default:
         return [
           <li key="1">
-            {/* One time render, that is why I can use hardcoded keys */}
             <Payments />
+          </li>,
+          <li key="3" style={{ margin: "0 1rem" }}>
+            Credits : {this.props.auth.credits}
           </li>,
           <li key="2">
             <a href="/api/logout">Logout</a>

@@ -1,11 +1,9 @@
-const c = require("config");
 const keys = require("../config/keys");
 const stripe = require("stripe")(keys.STRIPE_SECRET_KEY);
+const requireLogin = require("../middlewares/requireLogin");
 
 module.exports = (app) => {
-  app.post("/api/stripe", async (req, res) => {
-    // `source` is obtained with Stripe.js;
-    // see https://stripe.com/docs/payments/accept-a-payment-charges#web-create-token
+  app.post("/api/stripe", requireLogin, async (req, res) => {
     const charge = await stripe.charges.create({
       amount: 500,
       currency: "usd",
